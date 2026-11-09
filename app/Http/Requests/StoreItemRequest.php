@@ -23,7 +23,25 @@ class StoreItemRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'name' => 'required|max:255',
+            'description' => 'nullable',
         ];
     }
+}
+
+class UpdateItemRequest extends FormRequest
+{ 
+    public function authorize()
+    {
+        return true;
+    }
+    
+    public function update() 
+    { 
+        return [
+            'name' => 'required|max:255',
+            'description' => 'nullable',
+        ];
+    }
+
 }
