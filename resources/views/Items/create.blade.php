@@ -1,7 +1,16 @@
 @extends('layouts.app')
 
 @section('title', 'Page Title')
-
+    <h1>Nieuw Item Aanmaken</h1>
 @section('content')
-    <p>This is the content for the page.</p>
+    <form action="{{ route ('items.store') }}" method="POST"> 
+        @csrf 
+        <label for="name">Naam:</label>
+        <input type="text" id="name" name="name" required>
+        <br>
+        <label for="description">Beschrijving:</label> 
+        <textarea id="description" name="description"></textarea>
+        <br>
+        <button type="submit">Opslaan</button>
+    </form>
 @endsection

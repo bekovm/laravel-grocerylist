@@ -28,7 +28,23 @@ class ItemController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // Valideert de inkomende gegevens
+        $validated = $request->validate([
+            'name' => 'required|max:255',
+            'description' => 'nullable',
+        ]);
+
+        $item = new Item();
+
+
+        // Stelt de 'name' en 'description' waarden in op het gevalideerde gegevens
+        $item->name = $validated['name'];
+        $item->description = $validated['description'];
+        
+        $item->save();
+
+        // Stuurt de gebruiker naar de lijst van items
+        return redirect()->route('items.index');
     }
 
     /**
@@ -44,15 +60,29 @@ class ItemController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $item = item::find($id);
+        return view('items.edit', compact('item'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
-    {
-        //
+    public function update(Request $request, Item $item)
+    { 
+        // Valideert de inkomende gegevens
+         $validated = $request->validate([
+            'name' => 'required|max:255',
+            'description' => 'nullable',
+        ]);
+
+        // Stelt de 'name' en 'description' waarden in op het gevalideerde gegevens
+        $item->name = $validated['name'];
+        $item->description = $validated['description'];
+
+        $item->save();
+
+        // Stuurt de gebruiker naar de lijst van items
+        return redirect()->route('items.index');
     }
 
     /**
