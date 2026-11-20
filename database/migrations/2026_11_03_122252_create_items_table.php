@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('items', function (Blueprint $table) {
             $table->id();
+            $table->foreignID('category_id');
             $table->string('name');
             $table->text('description')->nullable();
             $table->timestamps();

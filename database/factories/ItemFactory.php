@@ -7,6 +7,8 @@ use App\Models\Category;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 
+$item = \App\Models\Item::factory()->create();
+$item->category;
 /**
  * @extends Factory<Item>
  */
@@ -24,5 +26,8 @@ class ItemFactory extends Factory
             'description' => $this->faker->sentence(),
             'category_id' => Category::inRandomOrder()->first()->id,
         ];
+       
     }
+
 }
+ 
