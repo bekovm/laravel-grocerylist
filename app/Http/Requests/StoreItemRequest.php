@@ -25,23 +25,7 @@ class StoreItemRequest extends FormRequest
         return [
             'name' => 'required|max:255',
             'description' => 'nullable',
+            'category_id' => 'required|exists:categories,id',
         ];
     }
-}
-
-class UpdateItemRequest extends FormRequest
-{ 
-    public function authorize()
-    {
-        return true;
-    }
-    
-    public function update() 
-    { 
-        return [
-            'name' => 'required|max:255',
-            'description' => 'nullable',
-        ];
-    }
-
 }

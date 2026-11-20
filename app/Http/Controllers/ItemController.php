@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreItemRequest;
 use App\Models\Item;
+use App\Models\Category;
 use Illuminate\Http\Request;
 
 class ItemController extends Controller
@@ -22,7 +23,8 @@ class ItemController extends Controller
      */
     public function create()
     {
-        return view('items.create');
+        $categories = Category::all();
+        return view('items.create', compact('categories'));
     }
 
     /**
@@ -51,10 +53,10 @@ class ItemController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Item $item)
     {
-        $item = item::find($id);
-        return view('items.edit', compact('item'));
+        $categories = Category::all();
+        return view('items.edit', compact('item', 'categories'));
     }
 
     /**
@@ -67,7 +69,7 @@ class ItemController extends Controller
 
         Item::update($validated);
 
-        
+
         // Stuurt de gebruiker naar de lijst van items
         return redirect()->route('items.index');
     }
