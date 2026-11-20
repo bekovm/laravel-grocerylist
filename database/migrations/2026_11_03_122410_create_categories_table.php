@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->timestamps();
+            $table->foreignID('category_id');
         });
     }
 
@@ -25,4 +26,6 @@ return new class extends Migration
     {
         Schema::dropIfExists('categories');
     }
+
+    
 };
